@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UFT-8">
+    <title>Tic Tac Toe</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+ <style>
+ body {
+    font-family: 'Lora', serif;
+    color: #fff;
+    background-color: grey;
+ }
+ h2 {
+    position: relative;
+    top: 6px;
+ }
+ .container {
+
+    text-align: center;
+    margin: auto;
+    max-width: 400px;
+    background-color: black;
+    height: 650px;
+    border-radius: 25px;
+ }
+ #reset-button {
+    background-color: lightblue;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    color: #fff;
+ }
+ #reset-button:hover {
+    transform: scale(1.1);
+    border: 4px solid white;
+    
+ }
+
+ .tic-tac-toe {
+    width: 315px;
+    margin: auto;
+    height: auto;
+ }
+ .tile {
+    background-color: #5A479F;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    position: relative;  
+    box-sizing: border-box;
+    cursor: pointer;
+    top: 10px;
+    vertical-align: top;
+    padding: 30px;
+    padding-left: 45px;
+    color: #fff;
+    font-size: 25px;
+    margin-top: 5px;
+    border-radius: 10px;
+
+ }
+
+ .tile:hover {
+    border: 4px solid #fff;
+    
+ }
+
+ .output {
+    text-align: center;
+    margin: auto;
+    font-size: 20px;
+    font-family: helvetica;
+    margin-bottom: 30px;
+ }
+
+
+
+
+
+ </style>
+ <body>
+    <div class="container">
+        <h2>Tic Tac Toe</h2>
+        <p>A simple game of tic tac toe to play against the computer. Start by choosing a square to play.</p>
+         <button id="reset-button" class="button">Reset </button>
+
+
+    
+    <div class="tic-tac-toe">
+        <div class="tile free" onclick="displayMarker('square1');"  id="square1"></div>
+        <div class="tile free" onclick="displayMarker('square2');" id="square2"></div>
+        <div class="tile free" onclick="displayMarker('square3');" id="square3"></div>
+        <div class="tile free" onclick="displayMarker('square4');" id="square4"></div>
+        <div class="tile free" onclick="displayMarker('square5');" id="square5"></div>
+        <div class="tile free" onclick="displayMarker('square6');" id="square6"></div>
+        <div class="tile free" onclick="displayMarker('square7');" id="square7"></div>
+        <div class="tile free" onclick="displayMarker('square8');" id="square8"></div>
+        <div class="tile free" onclick="displayMarker('square9');" id="square9"></div>
+    </div>
+    <div class="output">
+        <p id="scores"></p>
+    <p id="output"></p>
+    <p id="output2"> </p>
+    <p id="output2.5"></p>
+    <p id="output3">Play to see Whos wins!</p>
+
+    </div>
+</div>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+        
+            var greg = prompt("Please enter player1's name:");
+            var alex = prompt("Please enter player2's name:");
+            
+      
+
+        PlayerChoice = 1;
+        var gameWon = null;
+        var xWins = 0;
+        var owins = 0;
+        var dWins = 0;
+
+        var square1 = document.getElementById("square1");
+        var square2 = document.getElementById("square2");
+        var square3 = document.getElementById("square3");
+        var square4 = document.getElementById("square4");
+        var square5 = document.getElementById("square5");
+        var square6 = document.getElementById("square6");
+        var square7 = document.getElementById("square7");
+        var square8 = document.getElementById("square8");
+        var square9 = document.getElementById("square9");
+
+        function displayMarker(x){
+            if(document.getElementById(x).innerHTML != ""){
+                return;
+            }
+            else 
+            {
+                if(PlayerChoice == 1){
+                    document.getElementById(x).innerHTML = "X";
+                    PlayerChoice = 2;
+                }
+                else {
+                    document.getElementById(x).innerHTML = "O";
+                    PlayerChoice = 1;
+                }
+            }
+            checkWinnerX();
+            checkWinnerO();
+        };   //End of Display Squares //
+
+
+document.getElementById("reset-button").onclick = function (){
+        buttonCall();
+
+};    // End of Reset Button //
+    function buttonCall(){
+var tile = document.getElementsByClassName("tile");
+    for(var x = 0; x < tile.length; x ++){
+        tile[x].innerHTML = "";
+    }
+
+    };
+
+
+
+    function checkWinnerX(){
+        //check verticle wins
+        if(square1.innerHTML == "X" && square4.innerHTML == "X" && square7.innerHTML == "X" || 
+            square2.innerHTML == "X" && square5.innerHTML == "X" && square8.innerHTML == "X" ||
+            square3.innerHTML == "X" && square6.innerHTML == "X" && square9.innerHTML == "X"){
+         gameWon = true;   
+        endGameX();
+    }
+        //check horizontal 
+     else if(square1.innerHTML == "X" && square2.innerHTML == "X" && square3.innerHTML == "X" || 
+            square4.innerHTML == "X" && square5.innerHTML == "X" && square6.innerHTML == "X" ||
+            square7.innerHTML == "X" && square8.innerHTML == "X" && square9.innerHTML == "X"){
+         gameWon = true;   
+            endGameX();
+            
+    } else if (
+            square1.innerHTML == "X" && square5.innerHTML == "X" && square9.innerHTML == "X" || 
+            square3.innerHTML == "X" && square5.innerHTML == "X" && square7.innerHTML == "X"
+            ){
+         gameWon = true;   
+            endGameX();
+            
+                }
+            else if(square1.innerHTML != "" && square2.innerHTML != "" && square3.innerHTML != "" && square4.innerHTML != "" && square5.innerHTML != "" && square6.innerHTML != "" && square7.innerHTML != "" && square8.innerHTML != "" && square9.innerHTML != ""){
+                
+                drawGame();
+            
+        }
+    };       //End of check Winnner //
+
+
+    function checkWinnerO(){
+        //check verticle wins
+        if(square1.innerHTML == "O" && square4.innerHTML == "O" && square7.innerHTML == "O" || 
+            square2.innerHTML == "O" && square5.innerHTML == "O" && square8.innerHTML == "O" ||
+            square3.innerHTML == "O" && square6.innerHTML == "O" && square9.innerHTML == "O"){
+             gameWon = true;   
+        endGameO();
+    }
+        //check horizontal 
+     else if(square1.innerHTML == "O" && square2.innerHTML == "O" && square3.innerHTML == "O" || 
+            square4.innerHTML == "O" && square5.innerHTML == "O" && square6.innerHTML == "O" ||
+            square7.innerHTML == "O" && square8.innerHTML == "O" && square9.innerHTML == "O"){
+         gameWon = true;   
+            endGameO();
+           
+    } else if (
+            square1.innerHTML == "O" && square5.innerHTML == "O" && square9.innerHTML == "O" || 
+            square3.innerHTML == "O" && square5.innerHTML == "O" && square7.innerHTML == "O"
+            ){
+         gameWon = true;
+
+            endGameO();
+           
+        }
+
+      
+      
+
+
+    };       //End of check Winnner //
+
+
+
+        function endGameX(){
+            alert("Congrats " +  greg + " you won! ");
+            document.getElementById("scores").innerHTML = "<u>Scores</u>";
+            setTimeout(buttonCall,300);
+            
+            xWins ++;
+            document.getElementById("output").innerHTML = greg + " : " + xWins;
+            document.getElementById("output3").style.visibility = "hidden";
+
+        };
+
+         function endGameO(){
+            alert("Congrats " +  alex + " you won! ");
+            document.getElementById("scores").innerHTML = "<u>Scores</u>";
+            setTimeout(buttonCall,300);
+            owins ++
+            document.getElementById("output2").innerHTML = alex + " : " + owins;
+            document.getElementById("output3").style.visibility = "hidden";
+            
+        };
+
+        function drawGame(){
+            alert("The game is a draw, click the reset button to start again!");
+            dWins ++
+            document.getElementById("output2.5").innerHTML = "Draws : " + dWins;
+            document.getElementById("output3").style.visibility = "hidden";
+                       
+        };
+</script>
+</body>
+</html>
